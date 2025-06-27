@@ -2,9 +2,8 @@ const { defineConfig } = require('cypress');
 
 module.exports = defineConfig({
   e2e: {
-    baseUrl: 'https://front.serverest.dev', // 🔁 Troque pela URL da sua aplicação
+    baseUrl: 'https://front.serverest.dev',
     setupNodeEvents(on, config) {
-      // Pode configurar plugins aqui se necessário
     }
   }
 });
