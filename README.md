@@ -22,7 +22,6 @@ cypress/
 │ └── api/
 │ └── produtos.cy.js # Testes de API de produtos
 ├── fixtures/
-│ └── (dados de teste, se necessário)
 ├── support/
 │ ├── pages/
 │ │ ├── LoginPage.js
@@ -56,3 +55,8 @@ cypress.config.js
 ```bash
 git clone (https://github.com/VictorHugoSiqueira/Test)
 cd Test
+
+### 2. Rodar Automação
+
+npx cypress run
+
