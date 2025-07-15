@@ -1,0 +1,30 @@
+name: Daily/Pull Request Workflow
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+  schedule:
+    - cron: '00 10 * * 1-5'
+
+jobs:
+  cypress-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install system dependencies
+        run: sudo apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnss3 libxss1 libasound2 xvfb
+
+      - name: Install NPM dependencies
+        run: npm ci
+
+      - name: Run Cypress tests
+        run: npx cypress run --headless --browser chrome --config defaultCommandTimeout=60000
