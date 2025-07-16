@@ -26,5 +26,15 @@ jobs:
       - name: Install NPM dependencies
         run: npm ci
 
+      - name: Create cypress.env.json file
+        run: |
+          echo '{
+            "user": {
+              "CYPRESS_USER": "${{ secrets.CYPRESS_USER }}",
+              "CYPRESS_PASSWORD": "${{ secrets.CYPRESS_PASSWORD }}",
+              "CYPRESS_INVALID_PASSWORD": "${{ secrets.CYPRESS_INVALID_PASSWORD }}"
+            }
+          }' > cypress.env.json
+          
       - name: Run Cypress tests
         run: npx cypress run --headless --browser chrome --config defaultCommandTimeout=60000
