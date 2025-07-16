@@ -21,7 +21,7 @@ jobs:
           node-version: '18'
 
       - name: Install system dependencies
-        run: sudo apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnss3 libxss1 libasound2 xvfb
+        run: sudo apt-get install -y
 
       - name: Install NPM dependencies
         run: npm ci
