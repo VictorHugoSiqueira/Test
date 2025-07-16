@@ -1,8 +1,6 @@
 # 🧪 Cypress Testes Automatizados ![CI](https://github.com/VictorHugoSiqueira/Test/actions/workflows/testPipe.js.yml/badge.svg?branch=master)
 
 
-# 🧪 Cypress Testes Automatizados
-
 Este repositório contém testes automatizados utilizando o **Cypress**, organizados com o padrão **Page Object Model (POM)** e cobrindo cenários de **interface gráfica (UI)** e **API REST**.
 
 ---
