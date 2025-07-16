@@ -1,38 +1,32 @@
+import { clicarBotao, elementoVisivel, preencherCampo } from '../shared/sharedFormUtils';
+
 export class LoginPage {
 
-    elements = {
-    emailInput: () => cy.get('input[data-testid="email"]'),
-    senhaInput: () => cy.get('input[data-testid="senha"]'),
-    entrarBtn: () => cy.get('button[data-testid="entrar"]'),
-    cadastrarBtn: () => cy.get('a[data-testid="cadastrar"]'),
-    errorMessage: () => cy.get('.alert') 
-  };
+  static nameInput = 'input[data-testid="nome"]';
+  static emailInput = 'input[data-testid="email"]';
+  static senhaInput = 'input[data-testid="senha"]';
+  static entrarBtn = 'button[data-testid="entrar"]';
+  static confirmarCadastroBtn = 'button[data-testid="cadastrar"]';
+  static adicionarListaBtn = 'button[data-testid="adicionarNaLista"]';
+  static errorMsg = 'button[class="close btn-close-error-alert"]';
 
-  visit() {
+  static visitLoginPage() {
     cy.visit('/login');
+    elementoVisivel(LoginPage.emailInput);
+    return new LoginPage();
   }
 
-  preencherEmail(email) {
-    this.elements.emailInput().type(email);
+  static efetuarLogin(emailUsuario, senhaUsuario) {
+    preencherCampo(LoginPage.emailInput, emailUsuario);
+    preencherCampo(LoginPage.senhaInput, senhaUsuario);
+    clicarBotao(LoginPage.entrarBtn);
   }
 
-  preencherSenha(password) {
-    this.elements.senhaInput().type(password);
+  static assertLoggedIn() {
+    elementoVisivel(LoginPage.adicionarListaBtn);
   }
 
-  submit() {
-    this.elements.entrarBtn().click();
-  }
-
-  clickRegistrar() {
-    this.elements.cadastrarBtn().click();
-  }
-
-  assertErrorMessage(message) {
-    this.elements.errorMessage().should('contain', message);
-  }
-
-  assertLogin() {
-    cy.url().should('include', '/home');
+  static assertErrorMessage() {
+    elementoVisivel(LoginPage.errorMsg);
   }
 }
