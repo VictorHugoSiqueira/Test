@@ -1,25 +1,23 @@
+import { clicarBotao, preencherCampo } from "../shared/sharedFormUtils";
+
 export class CadastroPage {
-  elements = {
-    nameInput: () => cy.get('input[data-testid="nome"]'),
-    emailInput: () => cy.get('input[data-testid="email"]'),
-    passwordInput: () => cy.get('input[data-testid="password"]'),
-    confirmarCadastroBtn: () => cy.get('button[data-testid="cadastrar"]')
-  };
+  static cadastrarBtn = 'a[data-testid="cadastrar"]'
+  static emailInput = 'input[data-testid="email"]'
+  static nomeInput = 'input[data-testid="nome"]';
+  static senhaInput = 'input[data-testid="password"]';
+  static confirmarCadastroBtn = 'button[data-testid="cadastrar"]';
 
-  preencherNome(name) {
-    this.elements.nameInput().type(name);
+  static visitLoginPage() {
+    cy.visit('/login');
+    cy.get(CadastroPage.emailInput).should('be.visible');
+    return new CadastroPage();
   }
 
-  preencherEmail(email) {
-    this.elements.emailInput().type(email);
-  }
-
-  preencherSenha(password) {
-    this.elements.passwordInput().type(password);
-  }
-
-  submit() {
-    this.elements.confirmarCadastroBtn().click();
-    cy.wait(3000)
+  static cadastrarNovoUsuario(nomeUsuario, emailUsuario, senhaUsuario) {
+    clicarBotao(CadastroPage.cadastrarBtn);
+    preencherCampo(CadastroPage.nomeInput, nomeUsuario);
+    preencherCampo(CadastroPage.emailInput, emailUsuario);
+    preencherCampo(CadastroPage.senhaInput, senhaUsuario);
+    clicarBotao(CadastroPage.confirmarCadastroBtn);
   }
 }
